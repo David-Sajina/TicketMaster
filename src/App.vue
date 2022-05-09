@@ -15,8 +15,17 @@
 					><v-btn fab large plain @click.stop="drawer = !drawer">
 						<v-icon>mdi-menu</v-icon>
 					</v-btn>
-					<v-toolbar-title style="margin-left: 20px"
-						>Ticket Master</v-toolbar-title
+					<v-toolbar-title
+						style="
+							margin-left: 20px;
+							font-weight: 700;
+							font-size: 35px;
+							text-shadow: 2px 2px #000000;
+						"
+						><span style="color: #bfff00">T</span>icket<span
+							style="color: #bfff00"
+							>M</span
+						>aster</v-toolbar-title
 					>
 				</v-toolbar>
 			</v-layout>
@@ -42,7 +51,12 @@
 				<v-divider></v-divider>
 
 				<v-list dense>
-					<v-list-item v-for="item in items" :key="item.title" link>
+					<v-list-item
+						v-for="item in items"
+						:key="item.title"
+						link
+						:to="item.link"
+					>
 						<v-list-item-icon>
 							<v-icon>{{ item.icon }}</v-icon>
 						</v-list-item-icon>
@@ -67,8 +81,8 @@
 			return {
 				drawer: null,
 				items: [
-					{ title: "Home", icon: "mdi-home" },
-					{ title: "About", icon: "mdi-help" },
+					{ title: "Home", icon: "mdi-home", link: "/" },
+					{ title: "About", icon: "mdi-help", link: "/about" },
 				],
 			};
 		},
