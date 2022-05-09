@@ -38,19 +38,9 @@
 
 <script>
 	// @ is an alias to /src
-
 	export default {
 		name: "Home",
 		components: {},
 	};
 </script>
-<style>
-	.transparent * {
-		opacity: 1;
-	}
-	.transparent {
-		opacity: 0.5;
-		-moz-opacity: 0.5;
-		filter: alpha(opacity=50);
-	}
-</style>
+<style></style>
