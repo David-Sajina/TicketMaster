@@ -2,7 +2,7 @@
 	<v-app>
 		<v-card>
 			<div class="d-flex">
-				<v-expansion-panels v-model="panel">
+				<v-expansion-panels>
 					<v-expansion-panel>
 						<v-expansion-panel-header>Neko pitanje?</v-expansion-panel-header>
 						<v-expansion-panel-content>

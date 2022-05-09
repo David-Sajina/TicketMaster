@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="">
 		<v-app id="inspire">
 			<v-layout
 				row
@@ -8,24 +8,26 @@
 			>
 				<v-toolbar
 					style="margin-left: 10px"
-					app
 					dark
 					color="#616a76"
 					class="hidden-xs-and-down"
 					><v-btn fab large plain @click.stop="drawer = !drawer">
 						<v-icon>mdi-menu</v-icon>
 					</v-btn>
-					<v-toolbar-title
-						style="
-							margin-left: 20px;
-							font-weight: 700;
-							font-size: 35px;
-							text-shadow: 2px 2px #000000;
-						"
-						><span style="color: #bfff00">T</span>icket<span
-							style="color: #bfff00"
-							>M</span
-						>aster</v-toolbar-title
+					<router-link style="text-decoration: none" to="/"
+						><v-toolbar-title
+							style="
+								margin-left: 20px;
+								font-weight: 700;
+								font-size: 35px;
+								color: white;
+								text-shadow: 2px 2px #000000;
+							"
+							><span style="color: #bfff00">T</span>icket<span
+								style="color: #bfff00"
+								>M</span
+							>aster</v-toolbar-title
+						></router-link
 					>
 				</v-toolbar>
 			</v-layout>
