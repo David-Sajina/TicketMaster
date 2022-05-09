@@ -75,7 +75,7 @@
 	</div>
 </template>
 
-<script type="text/babel">
+<script>
 	export default {
 		data() {
 			return {
@@ -83,13 +83,9 @@
 				items: [
 					{ title: "Home", icon: "mdi-home", link: "/" },
 					{ title: "About", icon: "mdi-help", link: "/about" },
+					{ title: "Login", icon: "mdi-login", link: "/login" },
 				],
 			};
-		},
-		methods: {
-			openGithub() {
-				window.open("https://github.com/disjfa/vuetify-sidebar-template");
-			},
 		},
 	};
 </script>
