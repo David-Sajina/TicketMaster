@@ -27,8 +27,10 @@
 						style="margin-left: 10px; margin-top: 10px"
 						><v-icon dark>mdi-login</v-icon>Login</v-btn
 					>
-					<v-btn style="float: right; margin-right: 10px; margin-top: 10px"
-						><v-icon dark>mdi-plus</v-icon> Sign in</v-btn
+					<v-btn
+						:to="{ name: 'Signup' }"
+						style="float: right; margin-right: 10px; margin-top: 10px"
+						><v-icon dark>mdi-plus</v-icon> Sign up</v-btn
 					>
 				</v-card>
 			</v-layout>

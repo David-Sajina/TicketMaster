@@ -5,10 +5,17 @@
 				<v-flex xs12 sm8 md4>
 					<v-card class="elevation-12">
 						<v-toolbar dark color="#616a76">
-							<v-toolbar-title>Login</v-toolbar-title>
+							<v-toolbar-title>Sign up</v-toolbar-title>
 						</v-toolbar>
 						<v-card-text>
 							<v-form>
+								<v-text-field
+									prepend-icon="mdi-email"
+									name="email"
+									label="Email"
+									v-model="email"
+									type="email"
+								></v-text-field>
 								<v-text-field
 									prepend-icon="mdi-account"
 									name="login"
@@ -29,7 +36,7 @@
 						<v-card-actions>
 							<v-spacer></v-spacer>
 							<!-- to="/" -->
-							<v-btn color="primary" @click="getTruth"
+							<v-btn color="primary" @click="register"
 								>Login<v-icon>mdi-check-circle-outline</v-icon></v-btn
 							>
 						</v-card-actions>
@@ -43,23 +50,25 @@
 <script>
 	import axios from "axios";
 	export default {
-		name: "Login",
+		name: "Signup",
 		data() {
 			return {
 				username: "",
 				password: "",
+				email: "",
 			};
 		},
 		methods: {
-			async getTruth() {
+			async register() {
 				try {
-					const temp = await axios.post(`http://localhost:5000/login`, {
+					const temp = await axios.post(`http://localhost:5000/register`, {
 						username: this.username,
 						password: this.password,
+						email: this.email,
 					});
-					console.log(temp.data);
+					console.log("Valek the god", temp);
 				} catch (error) {
-					console.log(error);
+					alert(error.response.data.error);
 				}
 			},
 		},
