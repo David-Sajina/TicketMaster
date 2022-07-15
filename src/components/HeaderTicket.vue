@@ -112,9 +112,12 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+    <v-btn depressed color="primary" @click="AddTicket"> Primary </v-btn>
   </v-container>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "HeaderTicket",
   data: () => ({
@@ -125,5 +128,16 @@ export default {
       start: null,
     },
   }),
+  methods: {
+    async AddTicket() {
+      try {
+        await axios.post("http://localhost:5000/ticket", {
+          name: this.ticket.name,
+          location: this.ticket.location,
+          start: this.ticket.start,
+        });
+      } catch (error) {}
+    },
+  },
 };
 </script>
