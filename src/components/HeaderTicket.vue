@@ -1,5 +1,9 @@
 <template>
-  <v-container style="margin-left: 20px" height="200px" class="my-4">
+  <v-container
+    style="margin-left: 20px margin-right: 20px"
+    height="20px"
+    class="my-4"
+  >
     <v-expansion-panels>
       <v-expansion-panel>
         <v-expansion-panel-header>
