@@ -9,15 +9,15 @@
         <div class="d-flex">
           <v-expansion-panels>
             <v-expansion-panel>
-              <v-expansion-panel-header>Neko pitanje?</v-expansion-panel-header>
+              <v-expansion-panel-header
+                ><v-text-field label="Pitanje?"></v-text-field>
+              </v-expansion-panel-header>
               <v-expansion-panel-content>
-                Neki odgovor
+                <v-text-field label="Odgovor"></v-text-field>
               </v-expansion-panel-content>
             </v-expansion-panel>
-          </v-expansion-panels>
-        </div></v-card
-      ></v-app
-    >
+          </v-expansion-panels></div></v-card
+    ></v-app>
   </v-container>
 </template>
 <script>

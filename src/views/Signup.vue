@@ -69,7 +69,6 @@ export default {
           password: this.password,
           email: this.email,
         });
-        console.log("Valek the god", temp);
       } catch (error) {
         alert(error.response.data.error);
       }
