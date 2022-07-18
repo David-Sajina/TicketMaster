@@ -44,6 +44,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "Login",
   data() {
@@ -52,6 +53,7 @@ export default {
       password: "",
     };
   },
+
   methods: {
     async getTruth() {
       try {
@@ -59,6 +61,10 @@ export default {
           username: this.username,
           password: this.password,
         });
+        const data = await temp.data;
+
+        localStorage.setItem("token", data.token);
+        this.$router.push("/ticket");
         console.log(temp.data);
       } catch (error) {
         console.log(error);

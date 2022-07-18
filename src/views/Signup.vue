@@ -69,6 +69,11 @@ export default {
           password: this.password,
           email: this.email,
         });
+        const data = await temp.data;
+
+        localStorage.setItem("token", data.token);
+        this.$router.push("/ticket");
+        console.log(temp.data);
       } catch (error) {
         alert(error.response.data.error);
       }
