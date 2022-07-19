@@ -58,6 +58,7 @@
             :key="item.title"
             link
             :to="item.link"
+            @click="menuActionClick(item.action)"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -87,8 +88,17 @@ export default {
         { title: "Ticket", icon: "mdi-ticket", link: "/ticket" },
         { title: "About", icon: "mdi-help", link: "/about" },
         { title: "Login", icon: "mdi-login", link: "/login" },
+        { title: "Logout", icon: "mdi-logout", action: "logout" },
       ],
     };
+  },
+  methods: {
+    menuActionClick(action) {
+      if (action === "logout") {
+        localStorage.clear();
+        this.$router.push("/login");
+      }
+    },
   },
 };
 </script>
