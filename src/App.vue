@@ -53,21 +53,35 @@
         <v-divider></v-divider>
 
         <v-list dense>
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-            :to="item.link"
-            @click="menuActionClick(item.action)"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
+          <div v-for="item in items" :key="item.title">
+            <v-list-item
+              link
+              v-if="user && item.logedIn"
+              :to="item.link"
+              @click="menuActionClick(item.action)"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content> </v-list-item
+            ><v-list-item
+              link
+              v-else-if="!user && !item.logedIn"
+              :to="item.link"
+              @click="menuActionClick(item.action)"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
         </v-list>
       </v-navigation-drawer>
 
@@ -79,26 +93,42 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
     return {
       drawer: null,
       items: [
-        { title: "Home", icon: "mdi-home", link: "/" },
-        { title: "Ticket", icon: "mdi-ticket", link: "/ticket" },
+        { title: "Home", icon: "mdi-home", link: "/", logedIn: true },
+        { title: "Ticket", icon: "mdi-ticket", link: "/ticket", logedIn: true },
         { title: "About", icon: "mdi-help", link: "/about" },
         { title: "Login", icon: "mdi-login", link: "/login" },
-        { title: "Logout", icon: "mdi-logout", action: "logout" },
+        {
+          title: "Logout",
+          icon: "mdi-logout",
+          action: "logout",
+          logedIn: true,
+        },
       ],
     };
   },
   methods: {
+    ...mapActions({ getUserData: "getUserData" }),
+    ...mapMutations({ logout: "logout" }),
     menuActionClick(action) {
       if (action === "logout") {
+        this.logout();
         localStorage.clear("token");
         this.$router.push("/");
       }
     },
+  },
+  computed: {
+    ...mapGetters({ user: "user" }),
+  },
+  mounted() {
+    this.getUserData();
   },
 };
 </script>

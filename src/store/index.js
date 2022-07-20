@@ -16,6 +16,10 @@ export default new Vuex.Store({
     setToken(state, token) {
       state.token = token;
     },
+    logout(state) {
+      state.user = null;
+      state.token = null;
+    },
   },
   actions: {
     async getUserData({ commit }) {
@@ -39,4 +43,9 @@ export default new Vuex.Store({
     },
   },
   modules: {},
+  getters: {
+    user(state) {
+      return state.user;
+    },
+  },
 });
