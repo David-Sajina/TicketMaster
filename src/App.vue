@@ -95,8 +95,8 @@ export default {
   methods: {
     menuActionClick(action) {
       if (action === "logout") {
-        localStorage.clear();
-        this.$router.push("/login");
+        localStorage.clear("token");
+        this.$router.push("/");
       }
     },
   },

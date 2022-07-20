@@ -19,7 +19,6 @@ export default new Vuex.Store({
   },
   actions: {
     async getUserData({ commit }) {
-      console.log("Radim hehe");
       if (localStorage.getItem("token")) {
         commit("setToken", localStorage.getItem("token"));
         axios.defaults.headers.common["x-auth-header"] =
