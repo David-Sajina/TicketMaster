@@ -1,30 +1,43 @@
 <template>
-  <v-container
-    style="margin-left: 20px margin-right: 20px"
-    height="20px"
-    class="my-4"
-  >
-    <v-app>
-      <v-card>
-        <div class="d-flex">
-          <v-expansion-panels>
-            <v-expansion-panel>
-              <v-expansion-panel-header
-                ><v-text-field label="Pitanje?"></v-text-field>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-text-field label="Odgovor"></v-text-field>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels></div></v-card
-    ></v-app>
-  </v-container>
+	<v-container>
+		<v-card>
+			<div class="d-flex">
+				<v-expansion-panels>
+					<v-expansion-panel>
+						<v-expansion-panel-header
+							><v-text-field
+								:value="question"
+								disabled
+								label="Pitanje?"
+							></v-text-field>
+						</v-expansion-panel-header>
+						<v-expansion-panel-content>
+							<v-text-field
+								:value="answer"
+								disabled
+								label="Odgovor"
+							></v-text-field>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+				</v-expansion-panels></div
+		></v-card>
+	</v-container>
 </template>
 <script>
-export default {
-  name: "QA",
-  data: () => ({
-    readonly: false,
-  }),
-};
+	import { mapGetters } from "vuex";
+
+	export default {
+		name: "QA",
+		props: {
+			question: String,
+			answer: String,
+		},
+		data: () => ({
+			readonly: false,
+		}),
+
+		computed: {
+			...mapGetters({ user: "user" }),
+		},
+	};
 </script>

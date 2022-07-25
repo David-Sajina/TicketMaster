@@ -1,15 +1,15 @@
 <template>
-  <div class="ticket">
-    <header-ticket />
-  </div>
+	<div class="ticket">
+		<header-ticket />
+	</div>
 </template>
 <script>
-import HeaderTicket from "../components/HeaderTicket.vue";
+	import HeaderTicket from "../components/HeaderTicket.vue";
 
-export default {
-  name: "About",
-  components: {
-    HeaderTicket,
-  },
-};
+	export default {
+		name: "About",
+		components: {
+			HeaderTicket,
+		},
+	};
 </script>
