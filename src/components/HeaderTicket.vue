@@ -92,7 +92,13 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="date" no-title scrollable>
+                  <v-date-picker
+                    v-model="date"
+                    :reactive="reactive"
+                    :min="nowDate"
+                    no-title
+                    scrollable
+                  >
                     <v-spacer></v-spacer>
                     <v-btn
                       text
@@ -161,6 +167,10 @@ export default {
       question: "",
       answer: "",
     },
+    nowDate: new Date().toISOString().slice(0, 10),
+    date: new Date(),
+    date: new Date().toISOString().substr(0, 10),
+    reactive: false,
   }),
   methods: {
     async AddTicket() {
