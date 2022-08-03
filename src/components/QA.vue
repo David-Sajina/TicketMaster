@@ -17,17 +17,25 @@
                 v-model="newAnswer"
                 :disabled="disabled"
                 label="Odgovor"
-              ></v-text-field
-              ><v-btn class="ma-2" color="purple" dark>
-                <v-icon dark @click="edit"> mdi-wrench </v-icon>
+              ></v-text-field>
+              <v-btn class="ma-2" color="#bfff00" small>
+                <v-icon color="#616a76" @click="edit" small>
+                  mdi-pencil
+                </v-icon>
               </v-btn>
-              <v-btn class="ma-2" color="indigo" dark>
-                <v-icon @click.stop="dialog = true" dark> mdi-delete </v-icon>
+              <v-btn v-if="save" class="mx-2" color="#bfff00" small>
+                <v-icon color="#616a76" @click="saveEdit"> mdi-check </v-icon>
               </v-btn>
-              <v-dialog v-model="dialog" max-width="290">
+              <v-btn class="ma-2" color="#616a76" small>
+                <v-icon @click.stop="dialog = true" color="#bfff00" small>
+                  mdi-delete
+                </v-icon>
+              </v-btn>
+              <v-dialog v-model="dialog" color="#616a76" max-width="290">
                 <v-card>
-                  <v-card-title class="text-h5"> DELETE </v-card-title>
-
+                  <v-card-title class="text-h5" color="#616a76">
+                    DELETE
+                  </v-card-title>
                   <v-card-text>
                     Are you sure you want to delete this ticket question?
                   </v-card-text>
@@ -36,18 +44,15 @@
                     <v-spacer></v-spacer>
 
                     <v-btn color="green darken-1" text @click="dialog = false">
-                      Cancel
+                      Disagree
                     </v-btn>
 
                     <v-btn color="green darken-1" text @click="deleteThis">
-                      Delete
+                      Agree
                     </v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-              <v-btn v-if="save" class="mx-2" fab dark small color="primary">
-                <v-icon dark @click="saveEdit"> mdi-check </v-icon>
-              </v-btn>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -90,6 +95,20 @@ export default {
       await axios.delete(`http://localhost:5000/ticket/${this.id}`);
       this.dialog = false;
       this.comp = !this.comp;
+      this.$toast.info("Successfully deleted", {
+        position: "bottom-center",
+        timeout: 2966,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     },
 
     async saveEdit() {
