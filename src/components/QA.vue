@@ -18,19 +18,22 @@
                 :disabled="disabled"
                 label="Odgovor"
               ></v-text-field>
-              <v-btn class="ma-2" color="#bfff00" small>
-                <v-icon color="#616a76" @click="edit" small>
-                  mdi-pencil
-                </v-icon>
-              </v-btn>
-              <v-btn v-if="save" class="mx-2" color="#bfff00" small>
-                <v-icon color="#616a76" @click="saveEdit"> mdi-check </v-icon>
-              </v-btn>
-              <v-btn class="ma-2" color="#616a76" small>
-                <v-icon @click.stop="dialog = true" color="#bfff00" small>
-                  mdi-delete
-                </v-icon>
-              </v-btn>
+              <v-row>
+                <v-btn class="ma-2" color="#bfff00" small>
+                  <v-icon color="#616a76" @click="edit" small>
+                    mdi-pencil
+                  </v-icon>
+                </v-btn>
+                <v-btn v-if="save" class="ma-2" color="#bfff00" small>
+                  <v-icon color="#616a76" @click="saveEdit"> mdi-check </v-icon>
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn class="ma-2" color="#616a76" small>
+                  <v-icon @click.stop="dialog = true" color="#bfff00" small>
+                    mdi-delete
+                  </v-icon>
+                </v-btn>
+              </v-row>
               <v-dialog v-model="dialog" color="#616a76" max-width="290">
                 <v-card>
                   <v-card-title class="text-h5" color="#616a76">
