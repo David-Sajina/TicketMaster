@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-if="!loading">
     <v-container
       style="margin-left: 20px margin-right: 20px"
       height="20px"
@@ -15,7 +15,7 @@
                   <v-fade-transition leave-absolute>
                     <span v-if="open" key="0"> Enter the company name </span>
                     <span v-else key="1">
-                      {{ ticket.name }}
+                      {{ listaTicket.name }}
                     </span>
                   </v-fade-transition>
                 </v-col>
@@ -41,7 +41,7 @@
                       Enter the company location
                     </span>
                     <span v-else key="1">
-                      {{ ticket.location }}
+                      {{ listaTicket.location }}
                     </span>
                   </v-fade-transition>
                 </v-col>
@@ -65,7 +65,7 @@
                   <span v-if="open">Starting time ?</span>
                   <v-row v-else no-gutters style="width: 100%">
                     <v-col cols="6">
-                      Start date: {{ ticket.start || "Not set" }}
+                      Start date: {{ listaTicket.start || "Not set" }}
                     </v-col>
                   </v-row>
                 </v-fade-transition>
@@ -121,6 +121,11 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
+      <div class="text-center">
+        <v-btn class="ma-2" outlined color="#404040" @click="addAndUpdate">
+          Save
+        </v-btn>
+      </div>
       <q-a
         v-for="l in lista"
         :key="l._id"
@@ -153,7 +158,7 @@
             </v-expansion-panels></div></v-card
       ></v-container>
       <div class="text-center">
-        <v-btn class="ma-2" outlined color="#404040" @click="AddTicket">
+        <v-btn class="ma-2" outlined color="#404040" @click="addQuestionAnswer">
           Add ticket
         </v-btn>
       </div>
@@ -171,6 +176,9 @@ export default {
   data: () => ({
     date: null,
     lista: [],
+    listaTicket: null,
+    loading: true,
+    hasData: false,
     ticket: {
       name: "",
       location: "",
@@ -194,6 +202,17 @@ export default {
           name: this.ticket.name,
           location: this.ticket.location,
           start: this.ticket.start,
+        });
+        this.getQA();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async addQuestionAnswer() {
+      try {
+        await axios.post("http://localhost:5000/questionanswer", {
+          user: this.user.email,
           question: this.ticket.question,
           answer: this.ticket.answer,
         });
@@ -208,9 +227,53 @@ export default {
       try {
         axios.defaults.headers.common["x-auth-header"] =
           localStorage.getItem("token");
-        let lista1 = await axios.get("http://localhost:5000/ticket");
+        let lista1 = await axios.get("http://localhost:5000/questionanswer");
         this.lista = lista1.data;
-        console.log(this.lista);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async addAndUpdate() {
+      try {
+        if (!this.listaTicket._id) {
+          console.log("test 1");
+          await axios.post("http://localhost:5000/ticket", {
+            user: this.user,
+            name: this.ticket.name,
+            location: this.ticket.location,
+            start: this.ticket.start,
+          });
+        } else {
+          console.log("test");
+          await axios.patch(
+            `http://localhost:5000/ticket-info/${this.listaTicket._id}`,
+            {
+              name: this.ticket.name,
+              location: this.ticket.location,
+              start: this.ticket.start,
+            }
+          );
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      this.getHeader();
+    },
+    async getHeader() {
+      try {
+        axios.defaults.headers.common["x-auth-header"] =
+          localStorage.getItem("token");
+        let lista1 = await axios.get("http://localhost:5000/ticket");
+        if (lista1 && lista1.data && lista1.data.name) {
+          this.hasData = true;
+          this.ticket.name = lista1.data.name;
+          this.ticket.start = lista1.data.start;
+          this.ticket.location = lista1.data.location;
+        }
+        this.loading = false;
+        this.listaTicket = lista1.data;
+        console.log("test", lista1.data);
       } catch (error) {
         console.log(error);
       }
@@ -219,6 +282,7 @@ export default {
 
   mounted() {
     this.getQA();
+    this.getHeader();
   },
 };
 </script>
