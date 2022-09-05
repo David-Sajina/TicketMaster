@@ -20,9 +20,19 @@
 						><b>Postavi svoje pitanje..</b></v-expansion-panel-header
 					>
 					<v-expansion-panel-content class="mt-3">
-						<v-text-field label="Unesite Vaš Email"></v-text-field>
-						<i><v-text-field label="Ovdje postavi pitanje.."></v-text-field></i>
-						<v-btn class="ma-2" outlined color="indigo"> Pošalji </v-btn>
+						<v-text-field
+							v-model="email"
+							label="Unesite Vaš Email"
+						></v-text-field>
+						<i
+							><v-text-field
+								v-model="pitanje"
+								label="Ovdje postavi pitanje.."
+							></v-text-field
+						></i>
+						<v-btn class="ma-2" outlined color="indigo" @click="SendQuestion">
+							Pošalji
+						</v-btn>
 					</v-expansion-panel-content>
 				</v-expansion-panel>
 			</v-expansion-panels>
@@ -43,11 +53,11 @@
 			QA,
 			QuAn,
 		},
-		data() {
-			return {
-				lista: [],
-			};
-		},
+		data: () => ({
+			lista: [],
+			email: "",
+			pitanje: "",
+		}),
 		methods: {
 			async getQA() {
 				try {
@@ -58,6 +68,22 @@
 					console.log(lista1.data);
 				} catch (error) {
 					console.log(error);
+				}
+			},
+			async SendQuestion() {
+				console.log(this.$route.params.us, this.email, this.pitanje);
+				if (!this.pitanje || !this.email) {
+					alert("Niste ispunili sva polja!");
+				} else {
+					try {
+						await axios.post("http://localhost:5000/send", {
+							user: this.$route.params.us,
+							email: this.email,
+							question: this.pitanje,
+						});
+					} catch (error) {
+						console.log(error);
+					}
 				}
 			},
 		},
