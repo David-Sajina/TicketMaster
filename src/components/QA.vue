@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="comp">
     <v-card>
       <div class="d-flex">
         <v-expansion-panels>
@@ -81,6 +81,7 @@ export default {
     newQuestion: "",
     newAnswer: "",
     dialog: false,
+    comp: true,
   }),
 
   methods: {
