@@ -6,8 +6,28 @@
 				:key="l._id"
 				:question="l.question"
 				:answer="l.answer"
-			/></div
-	></v-app>
+			/>
+		</div>
+		<div style="width: 90%" class="mx-auto">
+			<v-expansion-panels
+				:focusable="true"
+				:tile="true"
+				:hover="true"
+				class="pt-1 mt-2"
+			>
+				<v-expansion-panel>
+					<v-expansion-panel-header
+						><b>Postavi svoje pitanje..</b></v-expansion-panel-header
+					>
+					<v-expansion-panel-content class="mt-3">
+						<v-text-field label="Unesite Vaš Email"></v-text-field>
+						<i><v-text-field label="Ovdje postavi pitanje.."></v-text-field></i>
+						<v-btn class="ma-2" outlined color="indigo"> Pošalji </v-btn>
+					</v-expansion-panel-content>
+				</v-expansion-panel>
+			</v-expansion-panels>
+		</div></v-app
+	>
 </template>
 
 <script>
