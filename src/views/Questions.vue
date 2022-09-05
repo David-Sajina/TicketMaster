@@ -20,18 +20,12 @@
 						><b>Postavi svoje pitanje..</b></v-expansion-panel-header
 					>
 					<v-expansion-panel-content class="mt-3">
-						<v-text-field
-							v-model="email"
-							label="Unesite Vaš Email"
-						></v-text-field>
+						<v-text-field v-model="email" label="Email.."></v-text-field>
 						<i
-							><v-text-field
-								v-model="pitanje"
-								label="Ovdje postavi pitanje.."
-							></v-text-field
+							><v-text-field v-model="pitanje" label="Question.."></v-text-field
 						></i>
 						<v-btn class="ma-2" outlined color="indigo" @click="SendQuestion">
-							Pošalji
+							Send
 						</v-btn>
 					</v-expansion-panel-content>
 				</v-expansion-panel>
@@ -73,7 +67,20 @@
 			async SendQuestion() {
 				console.log(this.$route.params.us, this.email, this.pitanje);
 				if (!this.pitanje || !this.email) {
-					alert("Niste ispunili sva polja!");
+					this.$toast.error("Fill in all fields", {
+						position: "top-center",
+						timeout: 5000,
+						closeOnClick: true,
+						pauseOnFocusLoss: true,
+						pauseOnHover: true,
+						draggable: true,
+						draggablePercent: 0.6,
+						showCloseButtonOnHover: false,
+						hideProgressBar: true,
+						closeButton: "button",
+						icon: true,
+						rtl: false,
+					});
 				} else {
 					try {
 						await axios.post("http://localhost:5000/send", {
@@ -81,6 +88,22 @@
 							email: this.email,
 							question: this.pitanje,
 						});
+						this.$toast.success("Questeion successfully sent", {
+							position: "bottom-right",
+							timeout: 5000,
+							closeOnClick: true,
+							pauseOnFocusLoss: true,
+							pauseOnHover: true,
+							draggable: true,
+							draggablePercent: 0.6,
+							showCloseButtonOnHover: false,
+							hideProgressBar: true,
+							closeButton: "button",
+							icon: true,
+							rtl: false,
+						});
+						this.email = "";
+						this.pitanje = "";
 					} catch (error) {
 						console.log(error);
 					}
