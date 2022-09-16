@@ -6,12 +6,14 @@
 			<v-tab-item>
 				<header-ticket />
 			</v-tab-item>
-			<v-tab-item>
+			<v-tab-item v-if="lista">
 				<v-app>
 					<custom-questions
 						v-for="l in lista"
 						:key="l._id"
 						:question="l.question"
+						:email="l.email"
+						:user="l.user"
 					/>
 				</v-app>
 			</v-tab-item>
@@ -32,6 +34,7 @@
 		},
 		data: () => ({
 			lista: [],
+			loaded: false,
 		}),
 		methods: {
 			async getQ() {
@@ -49,7 +52,7 @@
 		computed: {
 			...mapGetters({ user: "user" }),
 		},
-		created() {
+		mounted() {
 			this.getQ();
 		},
 	};

@@ -64,6 +64,18 @@
 					console.log(error);
 				}
 			},
+			async sendQ() {
+				console.log(this.$route.params.us, this.email, this.pitanje);
+				try {
+					await axios.post("http://localhost:5000/sendq", {
+						user: this.$route.params.us,
+						email: this.email,
+						question: this.pitanje,
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			},
 			async SendQuestion() {
 				console.log(this.$route.params.us, this.email, this.pitanje);
 				if (!this.pitanje || !this.email) {
@@ -102,6 +114,7 @@
 							icon: true,
 							rtl: false,
 						});
+						this.sendQ();
 						this.email = "";
 						this.pitanje = "";
 					} catch (error) {
