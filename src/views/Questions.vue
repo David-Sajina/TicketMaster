@@ -17,7 +17,7 @@
 			>
 				<v-expansion-panel>
 					<v-expansion-panel-header
-						><b>Postavi svoje pitanje..</b></v-expansion-panel-header
+						><b>Submit your own question</b></v-expansion-panel-header
 					>
 					<v-expansion-panel-content class="mt-3">
 						<v-text-field v-model="email" label="Email.."></v-text-field>
@@ -65,7 +65,6 @@
 				}
 			},
 			async sendQ() {
-				console.log(this.$route.params.us, this.email, this.pitanje);
 				try {
 					await axios.post("http://localhost:5000/sendq", {
 						user: this.$route.params.us,
@@ -77,7 +76,6 @@
 				}
 			},
 			async SendQuestion() {
-				console.log(this.$route.params.us, this.email, this.pitanje);
 				if (!this.pitanje || !this.email) {
 					this.$toast.error("Fill in all fields", {
 						position: "top-center",

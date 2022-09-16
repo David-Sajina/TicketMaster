@@ -9,11 +9,13 @@
 			<v-tab-item v-if="lista">
 				<v-app>
 					<custom-questions
+						@emitt="getQ"
 						v-for="l in lista"
 						:key="l._id"
 						:question="l.question"
 						:email="l.email"
 						:user="l.user"
+						:id="l._id"
 					/>
 				</v-app>
 			</v-tab-item>
