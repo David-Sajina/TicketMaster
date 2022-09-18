@@ -41,9 +41,7 @@
 		methods: {
 			async getQ() {
 				try {
-					let lista1 = await axios.get(
-						`http://localhost:5000/q/${this.user.username}`
-					);
+					let lista1 = await axios.get(`/q/${this.user.username}`);
 					this.lista = lista1.data;
 					console.log(lista1.data);
 				} catch (error) {

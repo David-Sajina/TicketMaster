@@ -5,7 +5,9 @@ import vuetify from "./plugins/vuetify";
 import store from "./store";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import axios from "axios";
 
+axios.defaults.baseURL = "https://ticketmasterappbackend.herokuapp.com";
 Vue.use(Toast);
 
 Vue.config.productionTip = false;

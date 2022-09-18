@@ -95,7 +95,7 @@
 				this.save = !this.save;
 			},
 			async deleteThis() {
-				await axios.delete(`http://localhost:5000/ticket/${this.id}`);
+				await axios.delete(`/ticket/${this.id}`);
 				this.dialog = false;
 				this.comp = !this.comp;
 				this.$toast.info("Successfully deleted", {
@@ -117,13 +117,10 @@
 			async saveEdit() {
 				this.disabled = !this.disabled;
 				this.save = !this.save;
-				const res = await axios.patch(
-					`http://localhost:5000/ticket/${this.id}`,
-					{
-						newQuestion: this.newQuestion,
-						newAnswer: this.newAnswer,
-					}
-				);
+				const res = await axios.patch(`/ticket/${this.id}`, {
+					newQuestion: this.newQuestion,
+					newAnswer: this.newAnswer,
+				});
 				console.log(res.data);
 			},
 		},

@@ -32,7 +32,7 @@ export default new Vuex.Store({
 				delete axios.defaults.headers.common["x-auth-header"];
 			}
 			try {
-				res = await axios.get("http://localhost:5000/auth");
+				res = await axios.get("/auth");
 
 				commit("setUser", res.data);
 				console.log("user", res.data);

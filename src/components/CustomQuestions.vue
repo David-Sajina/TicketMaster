@@ -40,7 +40,7 @@
 		methods: {
 			async sendA() {
 				try {
-					await axios.post("http://localhost:5000/senda", {
+					await axios.post("/senda", {
 						user: this.user,
 						email: this.email,
 						question: this.question,
@@ -52,7 +52,7 @@
 				}
 			},
 			async deleteThis() {
-				await axios.delete(`http://localhost:5000/questiondelete/${this.id}`);
+				await axios.delete(`/questiondelete/${this.id}`);
 				this.dialog = false;
 				this.comp = !this.comp;
 				this.$toast.info("Successfully resolved", {

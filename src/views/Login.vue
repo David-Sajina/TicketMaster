@@ -62,7 +62,7 @@
 
 			async getTruth() {
 				try {
-					const temp = await axios.post(`http://localhost:5000/login`, {
+					const temp = await axios.post(`/login`, {
 						username: this.username,
 						password: this.password,
 					});

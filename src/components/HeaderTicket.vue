@@ -60,6 +60,18 @@
 				<v-btn class="ma-2" outlined color="#404040" @click="addAndUpdate">
 					Save
 				</v-btn>
+				<p>
+					This is your link with all the questions:
+					<a
+						v-bind:href="
+							'https://ticketmaster-app.netlify.app/questions/' +
+							this.user.username
+						"
+						>https://ticketmaster-app.netlify.app/questions/{{
+							this.user.username
+						}}</a
+					>
+				</p>
 			</div>
 			<q-a
 				v-for="l in lista"
@@ -109,6 +121,7 @@
 		name: "HeaderTicket",
 		components: { QA },
 		data: () => ({
+			link: "",
 			lista: [],
 			listaTicket: null,
 			loading: true,
@@ -126,7 +139,7 @@
 		methods: {
 			async AddTicket() {
 				try {
-					await axios.post("http://localhost:5000/ticket", {
+					await axios.post("/ticket", {
 						user: this.user.username,
 						name: this.ticket.name,
 						location: this.ticket.location,
@@ -139,7 +152,7 @@
 
 			async addQuestionAnswer() {
 				try {
-					await axios.post("http://localhost:5000/questionanswer", {
+					await axios.post("/questionanswer", {
 						user: this.user.username,
 						question: this.ticket.question,
 						answer: this.ticket.answer,
@@ -155,8 +168,10 @@
 				try {
 					axios.defaults.headers.common["x-auth-header"] =
 						localStorage.getItem("token");
-					let lista1 = await axios.get("http://localhost:5000/questionanswer");
+					let lista1 = await axios.get("/questionanswer");
 					this.lista = lista1.data;
+					this.link =
+						"https://ticketmaster-app.netlify.app/" + this.user.username;
 				} catch (error) {
 					console.log(error);
 				}
@@ -165,20 +180,17 @@
 				try {
 					if (!this.listaTicket._id) {
 						console.log("test 1");
-						await axios.post("http://localhost:5000/ticket", {
+						await axios.post("/ticket", {
 							user: this.user,
 							name: this.ticket.name,
 							location: this.ticket.location,
 						});
 					} else {
 						console.log("test");
-						await axios.patch(
-							`http://localhost:5000/ticket-info/${this.listaTicket._id}`,
-							{
-								name: this.ticket.name,
-								location: this.ticket.location,
-							}
-						);
+						await axios.patch(`/ticket-info/${this.listaTicket._id}`, {
+							name: this.ticket.name,
+							location: this.ticket.location,
+						});
 					}
 				} catch (e) {
 					console.error(e);
@@ -190,7 +202,7 @@
 				try {
 					axios.defaults.headers.common["x-auth-header"] =
 						localStorage.getItem("token");
-					let lista1 = await axios.get("http://localhost:5000/ticket");
+					let lista1 = await axios.get("/ticket");
 					if (lista1 && lista1.data && lista1.data.name) {
 						this.hasData = true;
 						this.ticket.name = lista1.data.name;
